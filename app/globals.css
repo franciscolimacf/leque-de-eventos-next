@@ -1,0 +1,16 @@
+/* Era o src/styles.css do Angular. A ordem da cascata, declarada uma vez. */
+@layer reset, base, layout, componentes, utilitarios;
+
+@import "./estilos/token.css";
+@import "./estilos/base.css";
+@import "./estilos/layout.css";
+@import "./estilos/components.css";
+@import "./estilos/utilities.css";
+
+/* Era o :host do app.css: no Angular, o <app-root> fazia o grid da página.
+   Aqui não existe <app-root>: quem faz é o <body>. */
+body {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100dvh;
+}

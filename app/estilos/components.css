@@ -1,0 +1,84 @@
+/* a camada pode ser reaberta quantas vezes quiser: o navegador junta tudo */
+@layer componentes {
+  /* ================= página do evento ================= */
+  .evento {
+    display: flex;
+    flex-direction: column;
+    gap: var(--esp-3);
+    border: var(--borda);
+    border-radius: var(--raio);
+    overflow: hidden;
+    background: var(--cor-superficie);
+    padding-block-end: var(--esp-4);
+  }
+
+  .evento__capa {
+    width: 100%;
+    aspect-ratio: 21 / 9;
+    object-fit: cover;
+    background: var(--cor-elevado);
+  }
+
+  .evento__corpo {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: var(--esp-2);
+    padding-inline: var(--esp-3);
+  }
+
+  .evento__meta {
+    color: var(--cor-texto-2);
+    font-size: 1rem;
+  }
+
+  .evento__acoes {
+    margin-block-start: var(--esp-1);
+  }
+
+  .botao {
+    display: inline-block;
+    padding: 0.7rem 1.4rem;
+    border-radius: var(--raio-sm);
+    background: var(--cor-marca);
+    color: var(--cor-marca-txt);
+    font-weight: 600;
+    text-decoration: none;
+    transition: filter var(--transicao);
+  }
+  .botao:hover {
+    filter: brightness(1.1);
+    color: var(--cor-marca-txt);
+  }
+
+  /* ================= programação ================= */
+  .programacao {
+    display: grid;
+    /* horário na coluna 1, descrição na 2 — sem tabela e sem float */
+    grid-template-columns: auto 1fr;
+    gap: var(--esp-1) var(--esp-3);
+    align-items: baseline;
+    max-width: var(--largura-texto);
+  }
+
+  .programacao dt {
+    color: var(--cor-texto-2);
+    font-variant-numeric: tabular-nums; /* horários alinhados na vertical */
+    white-space: nowrap;
+  }
+
+  .programacao dd {
+    margin: 0;
+  }
+
+  /* no celular, empilha: horário em cima, descrição embaixo */
+  @media (width < 30rem) {
+    .programacao {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    .programacao dd {
+      margin-block-end: var(--esp-2);
+    }
+  }
+}
