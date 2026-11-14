@@ -6,8 +6,13 @@ import type { Evento, Organizador } from "@/lib/tipos";
 const API =
   "https://aulas.umlequedetecnologia.com.br/api/leque-de-eventos/sala/franciscolimacf";
 
+/* (aula 11) Cada resposta fica guardada 60 segundos, com a etiqueta "eventos".
+   É o que deixa a página ser montada de novo sozinha, sem novo deploy, e o
+   que a aula 12 vai avisar depois de gravar. */
 async function ler<T>(caminho: string): Promise<T | undefined> {
-  const resposta = await fetch(`${API}${caminho}`);
+  const resposta = await fetch(`${API}${caminho}`, {
+    next: { revalidate: 60, tags: ["eventos"] },
+  });
   if (resposta.status === 404) return undefined;
   if (!resposta.ok)
     throw new Error(`GET ${caminho} respondeu ${resposta.status}`);
@@ -20,6 +25,10 @@ export async function listarEventos(): Promise<Evento[]> {
 
 export async function buscarEvento(slug: string): Promise<Evento | undefined> {
   return ler<Evento>(`/eventos/${encodeURIComponent(slug)}`);
+}
+
+export async function listarOrganizadores(): Promise<Organizador[]> {
+  return (await ler<Organizador[]>("/organizadores")) ?? [];
 }
 
 export async function buscarOrganizador(

@@ -3,10 +3,20 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Aviso from "@/components/Aviso";
 import ListaEventos from "@/components/ListaEventos";
-import { buscarOrganizador, eventosDoOrganizador } from "@/lib/api";
+import {
+  buscarOrganizador,
+  eventosDoOrganizador,
+  listarOrganizadores,
+} from "@/lib/api";
 import "./perfil-organizador.css";
 
 type Props = { params: Promise<{ slug: string }> };
+
+// (aula 11) Um endereço por organizador que a API tem, montado no build.
+export async function generateStaticParams() {
+  const organizadores = await listarOrganizadores();
+  return organizadores.map((organizador) => ({ slug: organizador.slug }));
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
