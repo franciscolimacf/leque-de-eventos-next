@@ -63,6 +63,12 @@ export default async function DetalheEvento({ params }: Props) {
             <dt>Investimento</dt>
             <dd>{e.gratuito ? "Gratuito" : "Pago"}</dd>
           </dl>
+
+          <p>
+            <Link className="botao" href={`/eventos/${e.slug}/editar`}>
+              Editar evento
+            </Link>
+          </p>
         </div>
       </article>
 

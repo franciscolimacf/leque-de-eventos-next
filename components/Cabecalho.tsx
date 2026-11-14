@@ -13,6 +13,7 @@ export default function Cabecalho() {
 
         <nav aria-label="Principal">
           <LinkDoMenu href="/eventos">Eventos</LinkDoMenu>
+          <LinkDoMenu href="/eventos/novo">Organizar</LinkDoMenu>
         </nav>
 
         <BotaoTema />
